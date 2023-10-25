@@ -2,9 +2,8 @@ package com.example.counter.local
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.counter.MainActivity
+import com.example.counter.activities.MainActivity
 
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MyViewModel : ViewModel(){

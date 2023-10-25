@@ -15,7 +15,7 @@ import com.example.counter.adapter.homeMovieadapter
 import com.example.counter.datamodel.movie
 import com.example.counter.datamodel.movieApi
 import com.example.counter.datamodel.movieList
-import com.example.counter.detailsActivity
+import com.example.counter.activities.detailsActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

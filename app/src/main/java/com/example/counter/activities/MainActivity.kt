@@ -1,8 +1,9 @@
-package com.example.counter
+package com.example.counter.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.counter.R
 import com.example.counter.fragment.FavoritesFragment
 import com.example.counter.fragment.HomeFragment
 import com.example.counter.fragment.SettingsFragment
