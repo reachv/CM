@@ -8,10 +8,10 @@ class parse : Application(){
         super.onCreate()
         Parse.initialize(
             Parse.Configuration.Builder(this)
-                .applicationId("qh7n5Avix4he8pKe13Qy0o1h3pcN9dlT3RG5ChWp")
-                .clientKey("GmkwmJJ22XKgYrKCushrHvElxnPddc2KksnlXQXk")
-                .server("https://parseai.back4app.com")
+                .applicationId("Knogl3QNo4lcCAwq1sbT1dNoKuUXSU0iMpxKJw73")
+                .clientKey("NoJoB4y1xoO4ZKIyqFjQBfKyTZTtmiXvcv56rIHp")
+                .server("https://parseapi.back4app.com")
                 .build()
-        );
+        )
     }
 }

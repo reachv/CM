@@ -26,7 +26,8 @@ class registerActivity : AppCompatActivity() {
             val user  = ParseUser()
             user.username = username.text.toString()
             user.setPassword(pass.text.toString())
-
+            var temp = ArrayList<Int>()
+            user.put("favorites", temp)
             user.signUpInBackground(SignUpCallback() {
                 if (it != null) {
                     Log.e("Registery", "SignUpException: " + it)
