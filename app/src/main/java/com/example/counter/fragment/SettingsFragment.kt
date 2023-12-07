@@ -39,54 +39,35 @@ class SettingsFragment : Fragment() {
         var pass = view.findViewById<TextView>(R.id.settingsPassword)
         var logout : Button = view.findViewById(R.id.logout)
         var save : Button = view.findViewById(R.id.Save)
+
         email  = view.findViewById(R.id.email)
         this.myViewModel.loadInputs(this)
 
+        user.setText(ParseUser.getCurrentUser().username)
         save.setOnClickListener {
             myViewModel.saveInput(email.text.toString(), 1)
+            //Queries usernames
+            var query = ParseUser.getQuery()
+            query.findInBackground { objects, e ->
+                if (e != null) {
+                    Log.e("SettingsQueryException: ", e.toString())
+                    return@findInBackground
+                }
+                //Changes username
+                var pUser = ParseUser.getCurrentUser()
+                pUser.username = user.text.toString()
+                pUser.saveInBackground {
+                    if(it != null){
+                        Log.e("SettingsSaveException: " , it.toString())
+                        Toast.makeText(context, "Username already exist", Toast.LENGTH_SHORT).show()
+                        return@saveInBackground
+                    }
+                    Toast.makeText(context, "Successfully changed username", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
 
-        user.setText(ParseUser.getCurrentUser().username)
-        user.addTextChangedListener(object : TextWatcher {
-            lateinit var before : String
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                before = s.toString()
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if(before.equals(s.toString()))return;
-                //Queries usernames
-                var query = ParseUser.getQuery()
-                query.findInBackground { objects, e ->
-                    if(e != null){
-                        Log.e("SettingsQueryException: ", e.toString())
-                        return@findInBackground
-                    }
-                    for(i in objects){
-                        if(user.equals(i.username)){
-                            Toast.makeText(context, "Username already exists", Toast.LENGTH_SHORT).show()
-                            return@findInBackground
-                        }
-                    }
-                    //Changes username
-                    var pUser = ParseUser.getCurrentUser()
-                    pUser.username = user.text.toString()
-                    pUser.saveInBackground {
-                        if(it != null){
-                            Log.e("SettingsSaveException: " , it.toString())
-                            return@saveInBackground
-                        }
-                        Toast.makeText(context, "Successfully changed username", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
-
-        })
         //Logs user out
         logout.setOnClickListener {
             ParseUser.logOutInBackground {
